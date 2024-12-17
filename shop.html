@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Shop Page</title>
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <h1 class="logo">WELCOME TO VINTANSHOP</h1>
+      <input type="text" id="searchBar" class="search-bar" placeholder="Search for products...">
+      <button onclick="searchItems()">Search</button>
+      <nav class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Cart (<span id="cartCount">0</span>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Sidebar Categories -->
+    <aside class="sidebar">
+      <h2>Categories</h2>
+      <ul>
+        <li onclick="filterCategory('Electronics')">Electronics</li>
+        <li onclick="filterCategory('Fashion')">Fashion</li>
+        <li onclick="filterCategory('Home & Living')">Home & Living</li>
+        <li onclick="filterCategory('Beauty')">Beauty</li>
+        <li onclick="filterCategory('Sports')">Sports</li>
+      </ul>
+    </aside>
+
+    <!-- Product Grid -->
+    <section class="product-grid" id="productGrid">
+      <!-- Products will load here dynamically -->
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 My Shop - All rights reserved.</p>
+  </footer>
+
+  <script src="shop.js"></script>
+</body>
+</html>

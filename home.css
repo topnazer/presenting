@@ -1,0 +1,295 @@
+/* General reset for better styling consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url("https://www.shutterstock.com/image-vector/online-shopping-digital-technology-icon-600nw-2217607781.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #e3dfdf;
+    min-height: 100vh;
+    padding: 20px;
+    flex-direction: column;
+}
+
+/* Header styles */
+.header {
+    background-image: url('https://www.shutterstock.com/image-photo/photo-excited-adorable-woman-long-260nw-1427198855.jpg');
+    color: white;
+    padding: 20px 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin: 40px 0;
+    display: flex; /* Flexbox for horizontal layout */
+    align-items: center; /* Center logo and title vertically */
+}
+
+.header .logo {
+    width: 120px;
+    height: auto;
+    margin-right: 20px; /* Adds space between logo and title */
+}
+
+.header h1 {
+    font-size: 2.2em;
+    letter-spacing: 2px;
+    margin: 0; /* Ensure there's no additional margin */
+    font-family: serif;
+}
+
+/* Search bar styles */
+.search-bar {
+    margin-top: 20px; /* Margin above the search bar */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center align items */
+}
+
+.search-bar input[type="text"] {
+    padding: 10px; /* Space inside the input */
+    width: 300px; /* Set a fixed width for the input field */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px 0 0 5px; /* Rounded corners on the left */
+    font-size: 16px; /* Larger font for readability */
+    transition: border-color 0.3s; /* Transition for border color */
+}
+
+.search-bar input[type="text"]:focus {
+    outline: none; /* Remove default outline */
+    border-color: #007bff; /* Change border color on focus */
+}
+
+.search-bar button {
+    padding: 10px 15px; /* Space inside the button */
+    border: none; /* No border */
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the right */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Same font size as input */
+    transition: background-color 0.3s; /* Transition for background color */
+}
+
+.search-bar button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Button group styles */
+.button-group {
+    margin-top: 60px;
+}
+
+.button-group ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.button-group li {
+    display: inline-block;
+}
+
+button {
+    background-color: #3d4f07;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #4caf50;
+}
+
+button:active {
+    background-color: #2e7d32;
+    transform: scale(0.97);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column; /* Stack logo and title vertically on smaller screens */
+        align-items: center; /* Center them horizontally */
+    }
+
+    .header h1 {
+        font-size: 1.6em;
+        text-align: center;
+    }
+
+    button {
+        font-size: 0.9em;
+        padding: 10px 20px;
+    }
+
+    .header {
+        padding: 15px 20px;
+    }
+
+    .search-bar {
+        flex-direction: column; /* Stack input and button vertically */
+    }
+
+    .search-bar input[type="text"] {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 10px; /* Space between input and button */
+    }
+
+    .search-bar button {
+        width: 100%; /* Full width for button */
+    }
+}
+
+/* Product showcase section */
+.product-showcase {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.product-showcase h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns layout */
+    gap: 30px; /* Gap between products */
+}
+
+.product {
+    background-color: #4642428a;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+}
+
+.product-img {
+    width: 150px;  /* Set the desired width */
+    height: auto;  /* Maintain aspect ratio */
+}
+
+.product h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.product p {
+    font-size: 1.2em;
+}
+
+.sale {
+    color: red;
+    font-weight: bold;
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 1200px) {
+    .products {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+    }
+}
+
+@media (max-width: 900px) {
+    .products {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns layout */
+    }
+}
+
+@media (max-width: 600px) {
+    .products {
+        grid-template-columns: 1fr; /* 1 column layout */
+    }
+}
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #fff5f5;
+    width: 100%;                  
+    position: relative;    
+    left: 50%;            
+    transform: translateX(-50%);  
+    font-size: 40px;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #041d38;
+}
+
+body > .footer-container,
+body > .footer-bottom {
+    margin-top: auto;
+}
+/* Styles for the footer container with columns */
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #333; /* Background for the footer container */
+    color: #fff; /* Default text color */
+    text-align: center;
+}
+
+.footer-column {
+    background-color: #444; /* Change this to your desired color */
+    padding: 15px; /* Add padding for spacing */
+    border-radius: 8px; /* Optional: adds rounded corners */
+}
+
+.footer-column h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    color: #fff;
+}
+
+/* Footer bottom styling */
+.footer-bottom {
+    text-align: center;
+    padding: 15px 0;
+    background-color: #222; /* Background for the footer bottom */
+    color: #aaa; /* Text color for the footer bottom */
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* Center the footer content */
+.footer-bottom p {
+    margin: 0;
+}

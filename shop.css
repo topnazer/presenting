@@ -1,0 +1,90 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  background-color: maroon;
+  color: white;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5em;
+}
+
+.search-bar {
+  padding: 0.5em;
+  width: 200px;
+}
+
+.nav-links a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.main-content {
+  display: flex;
+  padding: 1em;
+}
+
+.sidebar {
+  width: 200px;
+  padding: 1em;
+  background-color: #f4f4f4;
+}
+
+.sidebar h2 {
+  margin-bottom: 1em;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar li {
+  margin-bottom: 0.5em;
+  cursor: pointer;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1em;
+  flex-grow: 1;
+  padding: 1em;
+}
+
+.product-card {
+  background-color: white;
+  padding: 1em;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.product-card img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.product-card h3 {
+  margin: 0.5em 0;
+}
+
+.footer {
+  text-align: center;
+  padding: 1em;
+  background-color: #333;
+  color: white;
+}

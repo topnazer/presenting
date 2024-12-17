@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Login as Admin</h1>
+      <form id="loginForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required /><br /><br />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required /><br /><br />
+
+        <button type="submit">Login</button>
+        <a href="signup.html" style="text-decoration: none; color: blue"
+          >Don't have an account? Sign Up</a
+        >
+      </form>
+      <p id="loginMessage" style="color: red"></p>
+    </div>
+
+    <!-- Firebase v8 SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
+    <script>
+      // Firebase Configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDgb74gI2gcBG4DjpUS_-FcWX48r7qynlg",
+        authDomain: "ecommerce-c3384.firebaseapp.com",
+        projectId: "ecommerce-c3384",
+        storageBucket: "ecommerce-c3384.appspot.com",
+        messagingSenderId: "570435492482",
+        appId: "1:570435492482:web:aee7a17a23d70cfcbb329b",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Handle Login
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent page reload
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const loginMessage = document.getElementById("loginMessage");
+
+          // Firebase Authentication Login
+          firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              loginMessage.style.color = "green";
+              loginMessage.textContent = "Login successful!";
+              console.log("Login successful");
+
+              // Redirect to user dashboard
+              setTimeout(() => {
+                window.location.href = "user-dashboard.html";
+              }, 1000);
+            })
+            .catch((error) => {
+              console.error("Error:", error.message);
+              loginMessage.style.color = "red";
+              loginMessage.textContent = `Error: ${error.message}`;
+            });
+        });
+    </script>
+  </body>
+</html>

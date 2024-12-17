@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Sign Up</h1>
+      <form id="signupForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required /><br /><br />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" required /><br /><br />
+
+        <button type="button" onclick="handleSignUp()">Sign Up</button>
+        <a href="login.html" style="text-decoration: none; color: blue"
+          >Already have an account? Log in</a
+        >
+      </form>
+      <p id="signupMessage"></p>
+    </div>
+
+    <!-- Firebase Configuration and Sign Up Script Directly in HTML -->
+    <script type="module">
+      // Firebase configuration and initialization
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+      } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+      } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyDgb74gI2gcBG4DjpUS_-FcWX48r7qynlg",
+        authDomain: "ecommerce-c3384.firebaseapp.com",
+        projectId: "ecommerce-c3384",
+        storageBucket: "ecommerce-c3384.appspot.com",
+        messagingSenderId: "570435492482",
+        appId: "1:570435492482:web:aee7a17a23d70cfcbb329b",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+      const auth = getAuth(app);
+
+      // Define handleSignUp function
+      window.handleSignUp = function () {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const signupMessage = document.getElementById("signupMessage");
+
+        signupMessage.textContent = ""; // Clear any existing message
+
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            alert("Sign up successful!");
+
+            // Save additional user information in Firebase Realtime Database
+            const userRef = ref(database, "users/" + user.uid);
+            set(userRef, {
+              email: user.email,
+              createdAt: new Date().toISOString(),
+            })
+              .then(() => {
+                console.log("User data saved successfully.");
+              })
+              .catch((error) => {
+                console.error("Error saving user data:", error);
+              });
+
+            // Redirect to login page or user dashboard
+            window.location.href = "login.html"; // Redirect to login or user page after sign up
+          })
+          .catch((error) => {
+            // Handle Firebase authentication errors
+            const errorCode = error.code;
+            let errorMessage;
+
+            // Customize error messages based on the error code
+            switch (errorCode) {
+              case "auth/email-already-in-use":
+                errorMessage =
+                  "This email is already registered. Please log in.";
+                break;
+              case "auth/invalid-email":
+                errorMessage =
+                  "Invalid email format. Please enter a valid email address.";
+                break;
+              case "auth/weak-password":
+                errorMessage = "Password should be at least 6 characters.";
+                break;
+              default:
+                errorMessage = error.message;
+            }
+
+            // Show the error message in an alert prompt
+            alert("Firebase Error: " + errorMessage);
+          });
+      };
+    </script>
+  </body>
+</html>

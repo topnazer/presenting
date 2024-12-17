@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <button class="action-button" onclick="goToHome()">Back to Home</button>
+
+  <body>
+    <div class="container">
+      <!-- Left Section: Your Cart -->
+      <div class="left-section">
+        <h1>Your Cart</h1>
+        <div id="cartItems"></div>
+        <p id="totalPrice"></p>
+      </div>
+
+      <!-- Right Section: Purchased Items -->
+      <div class="right-section">
+        <h2>Purchased Items</h2>
+        <div id="purchasedItems" class="grid-container"></div>
+      </div>
+    </div>
+
+    <!-- Payment Option Modal -->
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <h2>Choose Payment Method</h2>
+        <button
+          class="action-button"
+          onclick="showPaymentForm('Cash on Delivery')"
+        >
+          Cash on Delivery
+        </button>
+        <button class="action-button" onclick="showPaymentForm('PayPal')">
+          PayPal
+        </button>
+        <button class="action-button" onclick="showPaymentForm('Gcash')">
+          Gcash
+        </button>
+        <button
+          class="action-button"
+          onclick="showPaymentForm('Bank Transfer')"
+        >
+          Bank Transfer
+        </button>
+        <br />
+        <button class="cancel-button" onclick="closePaymentModal()">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <!-- Payment Details Modal -->
+    <div id="paymentDetailsModal" class="modal">
+      <div class="modal-content">
+        <h2 id="paymentTitle"></h2>
+        <div id="paymentDetailsForm"></div>
+        <button class="action-button" onclick="completePurchase()">
+          Submit Payment
+        </button>
+        <button class="cancel-button" onclick="closePaymentDetailsModal()">
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const cartItemsDiv = document.getElementById("cartItems");
+      const purchasedItemsDiv = document.getElementById("purchasedItems");
+      const totalPriceDiv = document.getElementById("totalPrice");
+      const paymentModal = document.getElementById("paymentModal");
+      const paymentDetailsModal = document.getElementById(
+        "paymentDetailsModal"
+      );
+      const paymentDetailsForm = document.getElementById("paymentDetailsForm");
+      const paymentTitle = document.getElementById("paymentTitle");
+
+      let cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+      let purchasedItems = JSON.parse(localStorage.getItem("purchased")) || [];
+      let selectedItemIndex = null;
+      let selectedPaymentMethod = null;
+
+      function displayCart() {
+        cartItemsDiv.innerHTML = "";
+        let totalPrice = 0;
+
+        if (cartItems.length > 0) {
+          cartItems.forEach((item, index) => {
+            cartItemsDiv.innerHTML += `
+              <div class="cart-item">
+                <img src="${item.image}" alt="${item.title}">
+                <div>
+                  <p><strong>${item.title}</strong></p>
+                  <p>Price: $${item.price.toFixed(2)}</p>
+                </div>
+                <button class="action-button" onclick="openPaymentModal(${index})">Buy Now</button>
+                <button class="cancel-button" onclick="removeFromCart(${index})">Remove</button>
+              </div>
+            `;
+            totalPrice += item.price;
+          });
+          totalPriceDiv.innerHTML = `<strong>Total Price: $${totalPrice.toFixed(
+            2
+          )}</strong>`;
+        } else {
+          cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+        }
+      }
+
+      function displayPurchased() {
+        purchasedItemsDiv.innerHTML = "";
+        if (purchasedItems.length > 0) {
+          purchasedItems.forEach((item) => {
+            purchasedItemsDiv.innerHTML += `
+              <div class="purchased-item">
+                <img src="${item.image}" alt="${item.title}">
+                <div>
+                  <p><strong>${item.title}</strong></p>
+                  <p>Price: $${item.price.toFixed(2)}</p>
+                </div>
+              </div>
+            `;
+          });
+        } else {
+          purchasedItemsDiv.innerHTML = "<p>No items purchased yet.</p>";
+        }
+      }
+
+      function openPaymentModal(index) {
+        selectedItemIndex = index;
+        paymentModal.style.display = "flex";
+      }
+
+      function closePaymentModal() {
+        paymentModal.style.display = "none";
+      }
+
+      function showPaymentForm(method) {
+        selectedPaymentMethod = method;
+        paymentTitle.textContent = `Payment Method: ${method}`;
+        paymentDetailsForm.innerHTML = "";
+
+        if (method === "PayPal") {
+          paymentDetailsForm.innerHTML = `<label>PayPal Email:</label>
+            <input type="email" id="paypalEmail" placeholder="Enter your PayPal email">`;
+        } else if (method === "Gcash") {
+          paymentDetailsForm.innerHTML = `<label>Gcash Number:</label>
+            <input type="text" id="gcashNumber" placeholder="Enter your Gcash number">`;
+        } else if (method === "Bank Transfer") {
+          paymentDetailsForm.innerHTML = `<label>Card Number:</label>
+            <input type="text" id="bankCardNumber" placeholder="Enter your card number">
+            <label>Expiration Date:</label>
+            <input type="text" id="expDate" placeholder="MM/YY">`;
+        } else {
+          paymentDetailsForm.innerHTML =
+            "<p>Cash on Delivery selected. No details needed.</p>";
+        }
+
+        closePaymentModal();
+        paymentDetailsModal.style.display = "flex";
+      }
+
+      function closePaymentDetailsModal() {
+        paymentDetailsModal.style.display = "none";
+      }
+
+      function completePurchase() {
+        const item = cartItems[selectedItemIndex];
+        purchasedItems.push(item);
+        cartItems.splice(selectedItemIndex, 1);
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+        localStorage.setItem("purchased", JSON.stringify(purchasedItems));
+        closePaymentDetailsModal();
+        displayCart();
+        displayPurchased();
+      }
+
+      function removeFromCart(index) {
+        cartItems.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+        displayCart();
+      }
+
+      function goToHome() {
+        window.location.href = "home.html"; // Adjust the URL to your homepage
+      }
+
+      displayCart();
+      displayPurchased();
+    </script>
+  </body>
+</html>

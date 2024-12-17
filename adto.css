@@ -1,0 +1,129 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh; /* Full viewport height */
+    background-image: url('https://i.pinimg.com/736x/0a/be/92/0abe9229c939b8361f2d8a1085c3be0d.jpg'); /* Replace with your image URL */
+    background-size: cover; /* Ensure the background image covers the entire screen */
+    background-position: center; /* Center the background image */
+    background-attachment: fixed; /* Keep the background fixed during scrolling */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff; /* Text color set to white for contrast on dark background */
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Center the login form */
+.login-container {
+    background: rgba(255, 255, 255, 0.85); /* Transparent white background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Soft shadow for depth */
+    width: 100%;
+    max-width: 450px;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for login container */
+.login-container:hover {
+    transform: translateY(-10px); /* Slight lift effect */
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #333;
+    text-align: left;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #5fa8d3;
+    background-color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #5fa8d3; /* Soft blue color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #4a8db3;
+    transform: translateY(-2px); /* Button lift effect */
+}
+
+a {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #5fa8d3;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #366fc4; /* Change color on hover */
+    text-decoration: underline;
+}
+
+#loginMessage {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #f44336; /* Red color for error messages */
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+}
+
+/* For responsiveness */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    input, button {
+        font-size: 1rem;
+    }
+
+    a {
+        font-size: 1rem;
+    }
+}

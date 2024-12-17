@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Homepage</title>
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <div class="container">
+        <img src="logs.png" alt="Shop Logo" class="logo" />
+        <h1>Welcome to VINTAN SHOP</h1>
+
+        <!-- Navigation Links -->
+        <nav class="button-group">
+          <ul>
+            <li><button onclick="logout()">Logout</button></li>
+            <li><button onclick="goToContact()">Contact Us</button></li>
+            <li><button onclick="viewCart()">View Cart</button></li>
+            <!-- View Cart Button -->
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search products..." />
+        <button onclick="searchProducts()">Search</button>
+      </div>
+    </header>
+
+    <!-- Product Showcase -->
+    <section class="product-showcase">
+      <h2>Featured Products</h2>
+      <div class="products" id="productContainer">
+        <!-- Product 1 -->
+        <div class="product">
+          <img
+            src="https://econtent.o2.co.uk/o/econtent/media/get/53e70931-314f-49a1-9d2a-fb425a845b8b"
+            alt="Product 1"
+            class="product-img"
+          />
+          <h3>IPhone 19 ultra max</h3>
+          <p>Price: $49.99</p>
+          <p class="sale">On Sale: $39.99</p>
+          <button
+            class="buy-now"
+            onclick="buyNow({ title: 'IPhone 19 ultra max', price: 39.99, image: 'https://econtent.o2.co.uk/o/econtent/media/get/53e70931-314f-49a1-9d2a-fb425a845b8b' })"
+          >
+            Buy Now
+          </button>
+          <button
+            class="add-to-cart"
+            onclick="addToCart({ title: 'IPhone 19 ultra max', price: 39.99, image: 'https://econtent.o2.co.uk/o/econtent/media/get/53e70931-314f-49a1-9d2a-fb425a845b8b' })"
+          >
+            Add to Cart
+          </button>
+        </div>
+        <!-- Product 2 -->
+        <div class="product">
+          <img
+            src="https://img.ws.mms.shopee.ph/ph-11134207-7r98t-llw133odolptf2"
+            alt="Product 2"
+            class="product-img"
+          />
+          <h3>Oxygn Shirt</h3>
+          <p>Price: $59.99</p>
+          <p class="sale">On Sale: $49.99</p>
+          <button
+            class="buy-now"
+            onclick="buyNow({ title: 'Oxygn Shirt', price: 49.99, image: 'https://img.ws.mms.shopee.ph/ph-11134207-7r98t-llw133odolptf2' })"
+          >
+            Buy Now
+          </button>
+          <button
+            class="add-to-cart"
+            onclick="addToCart({ title: 'Oxygn Shirt', price: 49.99, image: 'https://img.ws.mms.shopee.ph/ph-11134207-7r98t-llw133odolptf2' })"
+          >
+            Add to Cart
+          </button>
+        </div>
+        <!-- Product 3 -->
+        <div class="product">
+          <img src="key.png" alt="Product 3" class="product-img" />
+          <h3>Inplay keyboard</h3>
+          <p>Price: $29.99</p>
+          <p class="sale">On Sale: $19.99</p>
+          <button
+            class="buy-now"
+            onclick="buyNow({ title: 'Inplay keyboard', price: 19.99, image: 'key.png' })"
+          >
+            Buy Now
+          </button>
+          <button
+            class="add-to-cart"
+            onclick="addToCart({ title: 'Inplay keyboard', price: 19.99, image: 'key.png' })"
+          >
+            Add to Cart
+          </button>
+        </div>
+        <!-- Product 4 -->
+        <div class="product">
+          <img src="lap.png" alt="Product 4" class="product-img" />
+          <h3>ASUS laptop</h3>
+          <p>Price: $29.99</p>
+          <p class="sale">On Sale: $19.99</p>
+          <button
+            class="buy-now"
+            onclick="buyNow({ title: 'ASUS laptop', price: 19.99, image: 'lap.png' })"
+          >
+            Buy Now
+          </button>
+          <button
+            class="add-to-cart"
+            onclick="addToCart({ title: 'ASUS laptop', price: 19.99, image: 'lap.png' })"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+      // Navigate to Shop Page
+
+      // Navigate to Contact Page
+      function goToContact() {
+        window.location.href = "contact.html";
+      }
+
+      // Admin Logout
+      function logout() {
+        localStorage.removeItem("userRole");
+        window.location.href = "login.html";
+      }
+
+      // Buy Now Action
+      function buyNow(product) {
+        localStorage.setItem("selectedProduct", JSON.stringify(product));
+        window.location.href = "buynow.html";
+      }
+
+      // Add to Cart Action
+      function addToCart(product) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push(product);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert("Item added to cart!");
+      }
+
+      // View Cart Action
+      function viewCart() {
+        window.location.href = "yourcart.html"; // Redirect to Your Cart page
+      }
+
+      // Search Products (API Fetch)
+      function searchProducts() {
+        const query = document
+          .getElementById("searchInput")
+          .value.toLowerCase()
+          .trim();
+        const productContainer = document.getElementById("productContainer");
+
+        fetch("https://fakestoreapi.com/products")
+          .then((response) => response.json())
+          .then((data) => {
+            // Filter products based on the query
+            const filteredProducts = data.filter((product) =>
+              product.title.toLowerCase().includes(query)
+            );
+
+            // Clear current products
+            productContainer.innerHTML = "";
+
+            // Display results
+            if (filteredProducts.length > 0) {
+              filteredProducts.forEach((product) => {
+                const productElement = document.createElement("div");
+                productElement.classList.add("product");
+                productElement.innerHTML = `
+                                <img src="${product.image}" alt="${
+                  product.title
+                }" class="product-img">
+                                <h3>${product.title}</h3>
+                                <p>Price: $${product.price.toFixed(2)}</p>
+                                <button class="buy-now" onclick="buyNow({ title: '${
+                                  product.title
+                                }', price: ${product.price}, image: '${
+                  product.image
+                }' })">Buy Now</button>
+                                <button class="add-to-cart" onclick="addToCart({ title: '${
+                                  product.title
+                                }', price: ${product.price}, image: '${
+                  product.image
+                }' })">Add to Cart</button>
+                            `;
+                productContainer.appendChild(productElement);
+              });
+            } else {
+              productContainer.innerHTML =
+                "<p>No products found. Please try another search.</p>";
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching products:", error);
+          });
+      }
+    </script>
+  </body>
+</html>
