@@ -43,8 +43,8 @@
             class="product-img"
           />
           <h3>IPhone 19 ultra max</h3>
-          <p>Price: $49.99</p>
-          <p class="sale">On Sale: $39.99</p>
+          <p>Price: ₱49.99</p>
+          <p class="sale">On Sale: ₱39.99</p>
           <button
             class="buy-now"
             onclick="buyNow({ title: 'IPhone 19 ultra max', price: 39.99, image: 'https://econtent.o2.co.uk/o/econtent/media/get/53e70931-314f-49a1-9d2a-fb425a845b8b' })"
@@ -66,8 +66,8 @@
             class="product-img"
           />
           <h3>Oxygn Shirt</h3>
-          <p>Price: $59.99</p>
-          <p class="sale">On Sale: $49.99</p>
+          <p>Price: ₱59.99</p>
+          <p class="sale">On Sale: ₱49.99</p>
           <button
             class="buy-now"
             onclick="buyNow({ title: 'Oxygn Shirt', price: 49.99, image: 'https://img.ws.mms.shopee.ph/ph-11134207-7r98t-llw133odolptf2' })"
@@ -85,8 +85,8 @@
         <div class="product">
           <img src="key.png" alt="Product 3" class="product-img" />
           <h3>Inplay keyboard</h3>
-          <p>Price: $29.99</p>
-          <p class="sale">On Sale: $19.99</p>
+          <p>Price: ₱29.99</p>
+          <p class="sale">On Sale: ₱19.99</p>
           <button
             class="buy-now"
             onclick="buyNow({ title: 'Inplay keyboard', price: 19.99, image: 'key.png' })"
@@ -95,6 +95,7 @@
           </button>
           <button
             class="add-to-cart"
+            ```html
             onclick="addToCart({ title: 'Inplay keyboard', price: 19.99, image: 'key.png' })"
           >
             Add to Cart
@@ -104,8 +105,8 @@
         <div class="product">
           <img src="lap.png" alt="Product 4" class="product-img" />
           <h3>ASUS laptop</h3>
-          <p>Price: $29.99</p>
-          <p class="sale">On Sale: $19.99</p>
+          <p>Price: ₱29.99</p>
+          <p class="sale">On Sale: ₱19.99</p>
           <button
             class="buy-now"
             onclick="buyNow({ title: 'ASUS laptop', price: 19.99, image: 'lap.png' })"
@@ -180,12 +181,11 @@
               filteredProducts.forEach((product) => {
                 const productElement = document.createElement("div");
                 productElement.classList.add("product");
-                productElement.innerHTML = `
-                                <img src="${product.image}" alt="${
+                productElement.innerHTML = `<img src="${product.image}" alt="${
                   product.title
                 }" class="product-img">
                                 <h3>${product.title}</h3>
-                                <p>Price: $${product.price.toFixed(2)}</p>
+                                <p>Price: ₱${product.price.toFixed(2)}</p>
                                 <button class="buy-now" onclick="buyNow({ title: '${
                                   product.title
                                 }', price: ${product.price}, image: '${
@@ -195,8 +195,7 @@
                                   product.title
                                 }', price: ${product.price}, image: '${
                   product.image
-                }' })">Add to Cart</button>
-                            `;
+                }' })">Add to Cart</button>`;
                 productContainer.appendChild(productElement);
               });
             } else {
